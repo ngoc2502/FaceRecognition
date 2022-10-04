@@ -1,0 +1,7 @@
+training_index.yml filter=lfs diff=lfs merge=lfs -text
+*.yml filter=lfs diff=lfs merge=lfs -text
+*yml. filter=lfs diff=lfs merge=lfs -text
+ls filter=lfs diff=lfs merge=lfs -text
+E:/UwayInternshipLearning/FaceRecognition/training_index.yml filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.ij filter=lfs diff=lfs merge=lfs -text
