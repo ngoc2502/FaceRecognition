@@ -11,13 +11,13 @@ for labl in os.listdir("images"):
 
 path='images'
 
-def generate_frames(path):
+def generate_frames():
     recog=cv2.face.LBPHFaceRecognizer_create()
     recog.read("training_index.yml")
 
     video=cv2.VideoCapture(0)
     facedetect=cv2.CascadeClassifier('haarcascade_frontalFace_default.xml')
-    Exist=os.path.exists(path)
+    
 
     while True:
         ret,frame=video.read()
@@ -45,7 +45,7 @@ def index():
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(generate_frames(path),mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__=='__main__':
     app.run(debug=True)
