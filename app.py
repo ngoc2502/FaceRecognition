@@ -15,7 +15,7 @@ def generate_frames():
     recog=cv2.face.LBPHFaceRecognizer_create()
     recog.read("training_index.yml")
 
-    video=cv2.VideoCapture(1)
+    video=cv2.VideoCapture(2)
     facedetect=cv2.CascadeClassifier('haarcascade_frontalFace_default.xml')
     
 
