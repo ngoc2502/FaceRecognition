@@ -9,7 +9,7 @@ import cv2
 import os
 
 app=Flask(__name__)
-jsglue = JSGlue(app)
+JSGlue(app)
 
 labels=[]
 
