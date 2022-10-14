@@ -54,7 +54,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/FaceRecognition',methods=["POST","GET"])
-def get_video_feed():
+def FaceRecognition():
     print('==================================')
     if request.method=='POST':
         str_dta=request.data.decode("UTF-8")
