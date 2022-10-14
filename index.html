@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        {{ JSGlue.include() }}
+<!--         {{ JSGlue.include() }} -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
   <body>
@@ -41,7 +41,7 @@
                     dataType : "json",
                     contentType: "application/json; charset=utf-8",
                     type: "POST",
-                    url: Flask.url_for('get_video_feed',{}),
+                    url: '/get_video_feed',
                     data:JSON.stringify(img),
 
                     success:function(response){
