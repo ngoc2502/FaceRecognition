@@ -53,7 +53,7 @@ def generate_frames(frame):
 def index():
     return render_template('index.html')
 
-@app.route('/get_video_feed',methods=["POST","GET"])
+@app.route('/FaceRecognition/get_video_feed',methods=["POST","GET"])
 def get_video_feed():
     print('==================================')
     if request.method=='POST':
