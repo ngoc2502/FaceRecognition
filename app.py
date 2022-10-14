@@ -53,7 +53,7 @@ def generate_frames(frame):
 # def index():
 #     return render_template('index.html')
 
-@app.route('FaceRecognition/',methods=["POST","GET"])
+@app.route('/FaceRecognition',methods=["POST","GET"])
 def index():
     print('==================================')
     if request.method=='POST':
