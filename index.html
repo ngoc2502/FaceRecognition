@@ -1,17 +1,92 @@
 <!DOCTYPE html>
 <html>
-
-
+    <head>
+        {{ JSGlue.include() }}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
   <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8  offset-lg-2">
-                <h3 class="mt-5" style="text-align: center;" >Live Face Recognition Streaming</h3>
-                <p style="text-align: center;">
-                <img src="{{ url_for('video_feed') }}" width="60%" height="80%" class="center">
-                </p>
-            </div>
-        </div>
+    <span>MY FLASK</span>
+    <video id="video"></video>
+    
+    <div>
+        <canvas id="canvas2" width="700" height="500"></canvas><br>
+        <canvas id="canvas" width="700" height="500"></canvas><br>
     </div>
-    </body>
+    
+    <script type="text/javascript">
+        var canvas2=document.getElementById('canvas2');
+        var canvas =document.getElementById('canvas');
+        var src="data:image/jpeg;base64,";
+        var data_response;
+        window.onload=function(){
+            var constraints={video: true};
+            navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream){
+                
+                var video=document.querySelector('video');
+                video.srcObject=mediaStream;
+                var v;
+                v=video.play();
+
+            }).catch(function(err){
+                console.log('Hey Try again, err: '+err.message);
+            });
+                var i;
+                
+                i=window.setInterval(function(){
+                    var ctx=canvas.getContext('2d');
+                    ctx.drawImage(video,0,0,canvas.width,canvas.height);
+                    var img=canvas.toDataURL();
+
+                $.ajax({
+                    dataType : "json",
+                    contentType: "application/json; charset=utf-8",
+                    type: "POST",
+                    url: Flask.url_for('get_video_feed',{}),
+                    data:JSON.stringify(img),
+
+                    success:function(response){
+                        console.log("Ok SS ");
+                        data_response= unescape(encodeURIComponent(response.image)) ;
+                    },
+
+                    error:function(response){
+                        console.log("Fail");
+                    }
+                    
+                }).done(function() {console.log("Sent");})
+                
+                // Check data_response is Base64 or not
+                // function isBase64(data_response) {
+                //     if (data_response ==='' || data_response.trim() ===''){ return console.log('sai'); false; }
+                //     try {
+                //         res=false;
+                //         if (btoa(atob(data_response)) == data_response)
+                //         {
+                //             console.log('dung')
+                //             res=true;
+                //         }
+                //         return res;
+                //     } catch (err) {
+                //         console.log('sai');
+                //         return false;
+                //     }
+                // }
+            
+                // isBase64(data_response)
+
+                // Drawimage in new canvas
+                var new_ctx=canvas2.getContext('2d');
+                var image = new Image();
+                
+                image.onload=function(){
+                new_ctx.drawImage(this,0,0,canvas2.width,canvas2.height);
+                }
+
+                image.src=src+data_response;  
+                console.log(data_response.length)              
+                
+            },20);
+        }
+    </script>
+  </body>
 </html>
